@@ -1,0 +1,1146 @@
+%******************************************************************************%
+%                                                                              %
+%                  libft.en.tex for libft                                      %
+%                  Created on : Tue Apr 12 13:54:27 2016                       %
+%                  Made by : Geoffrey "Geff" LEGER <vikingz@staff.42.fr>       %
+%                                                                              %
+%******************************************************************************%
+
+\documentclass{42-en}
+
+
+%******************************************************************************%
+%                                                                              %
+%                                   Prologue                                   %
+%                                                                              %
+%******************************************************************************%
+
+
+\begin{document}
+
+
+                              \title{Libft}
+          \subtitle{Your first own library}
+                 \member{Pedago}{pedago@42.fr}
+
+
+\summary {
+  The aim of this project is to code a \texttt{C} library regrouping
+  usual functions that you'll be allowed to use in all your other
+  projects.
+}
+    \maketitle
+
+    \tableofcontents
+
+\newpage
+%******************************************************************************%
+%                                                                              %
+%                                  Foreword                                    %
+%                                                                              %
+%******************************************************************************%
+\chapter{Foreword}
+
+    This first project marks the beginning of your training
+    to become de software engineer.\\
+
+    To accompany you during this project, here is a list of
+    oustanding music groups. It's highly probable that you won't
+    like any of those. This will mean that you have poor music taste.
+    I'm sure that you have some other qualities such as being able to
+    hold your breath for more than 3 minutes or maybe you know by
+    heart the names of the 206 United Nations' signatory states.
+    The groups aren't listed in any particular order and
+    the list does not need to be exhaustive. Click on the links
+    to find out more.\\
+
+    \begin{itemize}\itemsep7pt
+
+        \item \href{https://www.youtube.com/watch?v=yqoLZpCexCk}{Between The Buried And Me}
+        \item \href{https://www.youtube.com/watch?v=y3J-I7EWieg}{Between The Buried And Me, c'est bon, mangez-en}
+        \item \href{https://www.youtube.com/watch?v=O-hnSlicxV4}{Tesseract}
+        \item \href{http://www.youtube.com/watch?v=YecYHXhBE70}{Chimp Spanner}
+        \item \href{http://www.youtube.com/watch?v=S4g7mPUskW8}{Emancipator}
+        \item \href{http://www.youtube.com/watch?v=xcF6r4QVSXM}{Cynic}
+        \item \href{http://www.youtube.com/watch?v=x0f_N6nTpmA}{Kalisia}
+        \item \href{https://www.youtube.com/watch?v=k0NCIF7yWNs}{O.S.I}
+        \item \href{http://www.youtube.com/watch?v=d6Y799Z7z-o}{Dream Theater}
+        \item \href{http://www.youtube.com/watch?v=WO-lbBZbX24}{Pain Of Salvation}
+        \item \href{http://www.youtube.com/watch?v=ig3L27s0BZg}{Crucified Barbara}\\
+
+    \end{itemize}
+
+
+
+\newpage
+%******************************************************************************%
+%                                                                              %
+%                                 Introduction                                 %
+%                                                                              %
+%******************************************************************************%
+\chapter{Introduction}
+
+    The \texttt{libft} project builds on the concepts you learned
+    during Day-06 of the bootcamp ie code a library of useful
+    functions that you will be allowed to reuse in most of your
+    \texttt{C} projects this year. This will save you a lot of
+    precious time. The following assignments will have you write lines
+    of code you already wrote during the bootcamp. See the
+    \texttt{libft} project as a Bootcamp reminder and use it wisely to
+    assess your level and progress.
+
+
+            \begin{figure}[H]
+                \begin{center}
+                    \includegraphics[width=12cm]{biblio.jpg}
+                    \caption{A possible representation of your Libft (artist's view)}
+                \end{center}
+            \end{figure}
+
+
+
+%******************************************************************************%
+%                                                                              %
+%                                  Objectives                                  %
+%                                                                              %
+%******************************************************************************%
+\chapter{Objectives}
+
+    \texttt{C} programming can be very tedious when one doesn’t have
+    access to those highly useful standard functions. This project
+    makes you to take the time to re-write those functions, understand
+    them, and learn to use them. This library will help you for all
+    your future \texttt{C} projects.
+
+    Through this project, we also give you the opportunity to
+    expand the list of functions with your own. Take the
+    time to expand your \texttt{libft} throughout the year.
+
+
+
+%******************************************************************************%
+%                                                                              %
+%                             General Instructions                             %
+%                                                                              %
+%******************************************************************************%
+\chapter{General Instructions}
+
+    \begin{itemize}
+
+        \item You must create the following functions in the order you
+          believe makes most sense. We encourage you to use the
+          functions you have already coded to write the next ones. The
+          difficulty level does not increase by assignment and the
+          project has not been structured in any specific way. It is
+          similar to a video game, where you can complete quests in
+          the order of your choosing and use the loot from the
+          previous quests to solve the next ones.
+
+      \item Your project must be written in accordance with the Norm.
+
+      \item Your functions should not quit unexpectedly (segmentation
+        fault, bus error, double free, etc) apart from undefined
+        behaviors. If this happens, your project will be considered non
+        functional and will receive a \texttt{0} during the defence.
+
+        \item All heap allocated memory space must be properly freed
+          when necessary.
+
+      \item You must submit a file
+        named \texttt{author} containing your username followed by a
+        '\textbackslash{}n' at the root of your repository,
+
+      \begin{42console}
+$>cat -e author
+xlogin$\end{42console}
+
+        \item You must submit a \texttt{C} file for each function you
+          create, as well as a \texttt{libft.h} file, which will
+          contain all the necessary prototypes as well as
+          \texttt{macros} and \texttt{typedefs} you might need. All
+          those files must be at the root of your repository.
+
+        \item You must submit a \texttt{Makefile} which will compile
+          your source files to a static library \texttt{libft.a}.
+
+        \item Your \texttt{Makefile} must at least contain the rules
+          \texttt{\$(NAME)}, \texttt{all}, \texttt{clean},
+          \texttt{fclean} et \texttt{re} in the order that you will
+          see fit.
+
+        \item Your \texttt{Makefile} must compile your work
+          with the flags \texttt{-Wall}, \texttt{-Wextra} and
+          \texttt{-Werror}.
+
+        \newpage
+        \item Only the following \texttt{libc} functions are allowed :
+          \texttt{malloc(3)}, \texttt{free(3)} and \texttt{write(2)},
+          and their usage is restricted. See below.
+
+        \item You must include the necessary \texttt{include} system
+          files to use one or more of the three authorized functions
+          in your \texttt{.c} files. The only additional system
+          \texttt{include} file you are allowed to use is
+          \texttt{string.h} to have access to the constant
+          \texttt{NULL} and to the type \texttt{size\_t}. Everything
+          else if forbidden.
+
+        \item We encourage you to create test programs for your
+          library even though this work \textbf{won't have to be
+            submitted and won't be graded}. It will give you a chance
+          to easily test your work and your peers’ work. You will find
+          those tests especially useful during your defence. Indeed,
+          during defence, you are free to use your tests and/or the
+          tests of the peer you are evaluating.
+
+    \end{itemize}
+
+
+
+%******************************************************************************%
+%                                                                              %
+%                                Mandatory part                                %
+%                                                                              %
+%******************************************************************************%
+\chapter{Mandatory part}
+
+    \section{Technical considerations}
+
+        \begin{itemize}
+
+            \item Your \texttt{libft.h} file can contain
+              \texttt{macros} and \texttt{typedefs} if needed.
+
+            \item A string must \textbf{ALWAYS} end with a
+              \texttt{'\textbackslash{}0'}, even if it is not included
+              in the function’s description, unless explicitly stated
+              otherwise.
+
+            \item It is forbidden to use global variables.
+
+            \item If you need sub-functions to write a complex
+              function, you must define these sub-functions as
+              \texttt{static} as stipulated in the Norm.
+
+        \end{itemize}
+
+        \info{Check out this link to find out more about static functions:
+          \url{http://codingfreak.blogspot.com/2010/06/static-functions-in-c.html}}
+
+        \begin{itemize}
+
+            \item You must pay attention to your types and wisely use
+              the casts when needed, especially when a \texttt{void*}
+              type is involved. Generally speaking, avoid implicit
+              casts. Example:
+
+            \begin{42ccode}
+char    *str;
+
+str = malloc(42 * sizeof(*str));            /* Wrong ! Malloc returns a void * (implicit cast) */
+str = (char *) malloc(42 * sizeof(*str));   /* Right ! (explicit cast) */
+            \end{42ccode}
+
+        \end{itemize}
+
+    \newpage
+    \section{Part 1 - Libc functions}
+
+        In this first part, you must re-code a set of the
+        \texttt{libc} functions, as defined in their
+        \texttt{man}. Your functions will need to present the same
+        prototype and behaviors as the originals. Your functions’
+        names must be prefixed by ``\texttt{ft\_}''. For instance
+        \texttt{strlen} becomes \texttt{ft\_strlen}.
+
+        \hint {
+          Some of the functions’ prototypes you have to re-code
+          use the "\texttt{restrict}" qualifier. This keyword is
+          part of the \texttt{c99} standard. It is therefore
+          forbidden to include it in your prototypes and to compile
+          it with the flag \texttt{-std=c99}.
+        }
+
+        You must re-code the following functions:
+
+        \vspace{5mm}
+        \begin{itemize}\itemsep1mm
+
+            \item \texttt{memset}
+            \item \texttt{bzero}
+            \item \texttt{memcpy}
+            \item \texttt{memccpy}
+            \item \texttt{memmove}
+            \item \texttt{memchr}
+            \item \texttt{memcmp}
+            \item \texttt{strlen}
+            \item \texttt{strdup}
+            \item \texttt{strcpy}
+            \item \texttt{strncpy}
+            \item \texttt{strcat}
+            \item \texttt{strncat}
+            \item \texttt{strlcat}
+            \item \texttt{strchr}
+            \item \texttt{strrchr}
+            \item \texttt{strstr}
+            \item \texttt{strnstr}
+            \item \texttt{strcmp}
+            \item \texttt{strncmp}
+            \item \texttt{atoi}
+            \item \texttt{isalpha}
+            \item \texttt{isdigit}
+            \item \texttt{isalnum}
+            \item \texttt{isascii}
+            \item \texttt{isprint}
+            \item \texttt{toupper}
+            \item \texttt{tolower}
+
+        \end{itemize}
+
+    \newpage
+    \section{Part 2 - Additional functions}
+
+        In this second part, you must code a set of functions that are
+        either not included in the \texttt{libc}, or included in a
+        different form. Some of these functions can be useful to write
+        Part 1's functions.\\
+
+    \begin{itemize}\itemsep1pt
+
+            % ft_memalloc
+            \item \begin{tabular}{|l|p{11cm}|}
+                \hline
+                \multicolumn{2}{|c|}{\textbf{ft\_memalloc}}\\
+                \hline
+                \textbf{Prototype} & \texttt{void
+                  *\hspace{5mm}ft\_memalloc(size\_t size);}\\
+                \hline
+                \textbf{Description} & Allocates (with
+                \texttt{malloc(3)}) and returns a ``fresh'' memory area.
+                The memory allocated is initialized to \texttt{0}.
+                If the allocation fails, the function returns \texttt{NULL}.\\
+                \hline
+                \textbf{Param. \#1} & The size of the memory that
+                needs to be allocated.\\
+                \hline
+                \textbf{Return value} & The allocated memory area.\\
+                \hline
+                \textbf{Libc functions} & \texttt{malloc(3)}\\
+                \hline
+            \end{tabular}
+
+            % ft_memdel
+            \item \begin{tabular}{|l|p{11cm}|}
+                \hline
+                \multicolumn{2}{|c|}{\textbf{ft\_memdel}}\\
+                \hline
+                \textbf{Prototype} &
+                \texttt{void\hspace{5mm}ft\_memdel(void **ap);}\\
+                \hline
+                \textbf{Description} & Takes as a parameter the address
+                of a memory area that needs to be freed with \texttt{free(3)},
+                then puts the pointer to \texttt{NULL}.\\
+                \hline
+                \textbf{Param. \#1} & A pointer's address that needs
+                its memory freed and set to \texttt{NULL}.\\
+                \hline
+                \textbf{Return value} & None.\\
+                \hline
+                \textbf{Libc functions} & \texttt{free(3)}.\\
+                \hline
+            \end{tabular}
+
+            % ft_strnew
+            \item \begin{tabular}{|l|p{11cm}|}
+                \hline
+                \multicolumn{2}{|c|}{\textbf{ft\_strnew}}\\
+                \hline
+                \textbf{Prototype} & \texttt{char
+                  *\hspace{5mm}ft\_strnew(size\_t size);}\\
+                \hline
+                \textbf{Description} & Allocates (with
+                \texttt{malloc(3)}) and returns a ``fresh'' string ending
+                with \texttt{'\textbackslash{}0'}. Each character of the
+                string is initialized at \texttt{'\textbackslash{}0'}.
+                If the allocation fails the function returns \texttt{NULL}.\\
+                \hline
+                \textbf{Param. \#1} & The size of the string to be
+                allocated.\\
+                \hline
+                \textbf{Return value} & The string allocated and initialized
+                to \texttt{0}.\\
+                \hline
+                \textbf{Libc functions} & \texttt{malloc(3)}\\
+                \hline
+            \end{tabular}
+
+            % ft_strdel
+            \item \begin{tabular}{|l|p{11cm}|}
+                \hline
+                \multicolumn{2}{|c|}{\textbf{ft\_strdel}}\\
+                \hline
+                \textbf{Prototype} &
+                \texttt{void\hspace{5mm}ft\_strdel(char **as);}\\
+                \hline
+                \textbf{Description} & Takes as a parameter the address
+                of a string that need to be freed with \texttt{free(3)},
+                then sets its pointer to \texttt{NULL}.\\
+                \hline
+                \textbf{Param. \#1} & The string's address that needs
+                to be freed and its pointer set to \texttt{NULL}.\\
+                \hline
+                \textbf{Return value} & None.\\
+                \hline
+                \textbf{Libc functions} & \texttt{Free(3)}.\\
+                \hline
+            \end{tabular}
+
+            % ft_strclr
+            \item \begin{tabular}{|l|p{11cm}|}
+                \hline
+                \multicolumn{2}{|c|}{\textbf{ft\_strclr}}\\
+                \hline
+                \textbf{Prototype} &
+                \texttt{void\hspace{5mm}ft\_strclr(char *s);}\\
+                \hline
+                \textbf{Description} & Sets every character of the string to the value
+                \texttt{'\textbackslash{}0'}.\\
+                \hline
+                \textbf{Param. \#1} & The string that needs to be
+                cleared.\\
+                \hline
+                \textbf{Return value} & None.\\
+                \hline
+                \textbf{Libc functions} & None.\\
+                \hline
+            \end{tabular}
+
+            % ft_striter
+            \item \begin{tabular}{|l|p{11cm}|}
+                \hline
+                \multicolumn{2}{|c|}{\textbf{ft\_striter}}\\
+                \hline
+                \textbf{Prototype} &
+                \texttt{void\hspace{5mm}ft\_striter(char *s, void
+                  (*f)(char *));}\\
+                \hline
+                \textbf{Description} & Applies the function \texttt{f}
+                to each character of the string passed as
+                argument. Each character is passed by address to \texttt{f}
+                to be modified if necessary.\\
+                \hline
+                \textbf{Param. \#1} & The string to iterate.\\
+                \hline
+                \textbf{Param. \#2} & The function to apply to each
+                character of \texttt{s}.\\
+                \hline
+                \textbf{Return value} & None.\\
+                \hline
+                \textbf{Libc functions} & None.\\
+                \hline
+            \end{tabular}
+
+            % ft_striteri
+            \item \begin{tabular}{|l|p{11cm}|}
+                \hline
+                \multicolumn{2}{|c|}{\textbf{ft\_striteri}}\\
+                \hline
+                \textbf{Prototype} &
+                \texttt{void\hspace{5mm}ft\_striteri(char *s, void
+                  (*f)(unsigned int, char *));}\\
+                \hline
+                \textbf{Description} & Applies the function \texttt{f}
+                to each character of the string passed as
+                argument, and passing its index as first argument.
+                Each character is passed by address to \texttt{f}
+                to be modified if necessary.\\
+                \hline
+                \textbf{Param. \#1} & The string to iterate.\\
+                \hline
+                \textbf{Param. \#2} & The function to apply
+                to each character of \texttt{s} and its index.\\
+                \hline
+                \textbf{Return value} & None.\\
+                \hline
+                \textbf{Libc functions} & None.\\
+                \hline
+            \end{tabular}
+
+            % ft_strmap
+            \item \begin{tabular}{|l|p{11cm}|}
+                \hline
+                \multicolumn{2}{|c|}{\textbf{ft\_strmap}}\\
+                \hline
+                \textbf{Prototype} &
+                \texttt{char *\hspace{5mm}ft\_strmap(char const *s, char
+                  (*f)(char));}\\
+                \hline
+                \textbf{Description} & Applies the function \texttt{f}
+                to each character of the string given as
+                argument to create a ``fresh'' new string (with \texttt{malloc(3)})
+                resulting from the successive applications of \texttt{f}.\\
+                \hline
+                \textbf{Param. \#1} & The string to map.\\
+                \hline
+                \textbf{Param. \#2} & The function to apply
+                to each character of \texttt{s}.\\
+                \hline
+                \textbf{Return value} & The ``fresh'' string created
+                from the successive applications of \texttt{f}.\\
+                \hline
+                \textbf{Libc functions} & \texttt{malloc(3)}\\
+                \hline
+            \end{tabular}
+
+            % ft_strmapi
+            \item \begin{tabular}{|l|p{11cm}|}
+                \hline
+                \multicolumn{2}{|c|}{\textbf{ft\_strmapi}}\\
+                \hline
+                \textbf{Prototype} &
+                \texttt{char *\hspace{5mm}ft\_strmapi(char const *s, char
+                  (*f)(unsigned int, char));}\\
+                \hline
+                \textbf{Description} & Applies the function \texttt{f}
+                to each character of the string passed as
+                argument by giving its index as first argument
+                to create a ``fresh'' new string (with \texttt{malloc(3)})
+                resulting from the successive applications of \texttt{f}.\\
+                \hline
+                \textbf{Param. \#1} & The string to map.\\
+                \hline
+                \textbf{Param. \#2} & The function to apply
+                to each character of \texttt{s} and its index.\\
+                \hline
+                \textbf{Return value} & The ``fresh'' string created
+                from the successive applications of \texttt{f}.\\
+                \hline
+                \textbf{Libc functions} & \texttt{malloc(3)}\\
+                \hline
+            \end{tabular}
+
+            % ft_strequ
+            \item \begin{tabular}{|l|p{11cm}|}
+                \hline
+                \multicolumn{2}{|c|}{\textbf{ft\_strequ}}\\
+                \hline
+                \textbf{Prototype} &
+                \texttt{int\hspace{5mm}ft\_strequ(char const *s1, char
+                  const *s2);}\\
+                \hline
+                \textbf{Description} & Lexicographical comparison between
+                \texttt{s1} and \texttt{s2}. If the 2 strings are identical
+                the function returns \texttt{1}, or \texttt{0} otherwise.\\
+                \hline
+                \textbf{Param. \#1} & The first string to be compared.\\
+                \hline
+                \textbf{Param. \#2} & The second string to be compared.\\
+                \hline
+                \textbf{Return value} & \texttt{1} or \texttt{0} according to
+                if the 2 strings are identical or not.\\
+                \hline
+                \textbf{Libc functions} & None.\\
+                \hline
+            \end{tabular}
+
+            % ft_strnequ
+            \item \begin{tabular}{|l|p{11cm}|}
+                \hline
+                \multicolumn{2}{|c|}{\textbf{ft\_strnequ}}\\
+                \hline
+                \textbf{Prototype} &
+                \texttt{int\hspace{5mm}ft\_strnequ(char const *s1, char
+                  const *s2, size\_t n);}\\
+                \hline
+                \textbf{Description} & Lexicographical comparison between
+                \texttt{s1} and \texttt{s2} up to \texttt{n} characters
+                or until a \texttt{'\textbackslash{}0'} is reached. If the 2 strings
+                are identical, the function returns \texttt{1}, or \texttt{0} otherwise.\\
+                \hline
+                \textbf{Param. \#1} & The first string to be compared.\\
+                \hline
+                \textbf{Param. \#2} &The second string to be compared.\\
+                \hline
+                \textbf{Param. \#3} & The maximum number of characters
+                to be compared.\\
+                \hline
+                \textbf{Return value} & \texttt{1} or \texttt{0} according to
+                if the 2 strings are identical or not.\\
+                \hline
+                \textbf{Libc functions} & None.\\
+                \hline
+            \end{tabular}
+
+            % ft_strsub
+            \item \begin{tabular}{|l|p{11cm}|}
+                \hline
+                \multicolumn{2}{|c|}{\textbf{ft\_strsub}}\\
+                \hline
+                \textbf{Prototype} & \texttt{char
+                  *\hspace{5mm}ft\_strsub(char const *s, unsigned int
+                  start, size\_t len);}\\
+                \hline
+                \textbf{Description} & Allocates (with
+                \texttt{malloc(3)}) and returns a ``fresh'' substring
+                from the string given as argument. The substring
+                begins at index\texttt{start} and is of size \texttt{len}.
+                If \texttt{start} and \texttt{len} aren't refering to a
+                valid substring, the behavior is undefined. If the
+                allocation fails, the function returns \texttt{NULL}.\\
+                \hline
+                \textbf{Param. \#1} & The string from which create
+                the substring.\\
+                \hline
+                \textbf{Param. \#2} & The start index of the
+                substring.\\
+                \hline
+                \textbf{Param. \#3} & The size of the substring.\\
+                \hline
+                \textbf{Return value} & The substring.\\
+                \hline
+                \textbf{Libc functions} & \texttt{malloc(3)}\\
+                \hline
+            \end{tabular}
+
+            % ft_strjoin
+            \item \begin{tabular}{|l|p{11cm}|}
+                \hline
+                \multicolumn{2}{|c|}{\textbf{ft\_strjoin}}\\
+                \hline
+                \textbf{Prototype} &
+                \texttt{char *\hspace{5mm}ft\_strjoin(char const *s1,
+                  char const *s2);}\\
+                \hline
+                \textbf{Description} & Allocates (with
+                \texttt{malloc(3)}) and returns a ``fresh'' string ending
+                with \texttt{'\textbackslash{}0'}, result of the concatenation of
+                \texttt{s1} and \texttt{s2}. If the allocation fails
+                the function returns \texttt{NULL}.\\
+                \hline
+                \textbf{Param. \#1} & The prefix string.\\
+                \hline
+                \textbf{Param. \#2} & The suffix string.\\
+                \hline
+                \textbf{Return value} & The ``fresh'' string result of
+                the concatenation of the 2 strings.\\
+                \hline
+                \textbf{Libc functions} & \texttt{malloc(3)}\\
+                \hline
+            \end{tabular}
+
+            % ft_strtrim
+            \item \begin{tabular}{|l|p{11cm}|}
+                \hline
+                \multicolumn{2}{|c|}{\textbf{ft\_strtrim}}\\
+                \hline
+                \textbf{Prototype} &
+                \texttt{char *\hspace{5mm}ft\_strtrim(char const *s);}\\
+                \hline
+                \textbf{Description} & Allocates (with
+                \texttt{malloc(3)}) and returns a copy of the string
+                given as argument without whitespaces at the beginning or
+                at the end of the string. Will be considered as whitespaces
+                the following characters \texttt{' '},
+                \texttt{'\textbackslash{}n'} and
+                \texttt{'\textbackslash{}t'}. If \texttt{s} has no whitespaces
+                at the beginning or at the end, the function returns
+                a copy of \texttt{s}. If the allocation fails the function returns
+                \texttt{NULL}.\\
+                \hline
+                \textbf{Param. \#1} & The string to be trimed.\\
+                \hline
+                \textbf{Return value} & The ``fresh'' trimmed string or
+                a copy of \texttt{s}.\\
+                \hline
+                \textbf{Libc functions} & \texttt{malloc(3)}\\
+                \hline
+            \end{tabular}
+
+            % ft_strsplit
+            \item \begin{tabular}{|l|p{11cm}|}
+                \hline
+                \multicolumn{2}{|c|}{\textbf{ft\_strsplit}}\\
+                \hline
+                \textbf{Prototype} &
+                \texttt{char **\hspace{5mm}ft\_strsplit(char const *s,
+                  char c);}\\
+                \hline
+                \textbf{Description} & Allocates (with
+                \texttt{malloc(3)}) and returns an array of ``fresh''
+                strings (all ending with \texttt{'\textbackslash{}0'}, including
+                the array itself) obtained by spliting \texttt{s} using
+                the character \texttt{c} as a delimiter. If the allocation fails the
+                function returns \texttt{NULL}. Example :
+                \texttt{ft\_strsplit("*hello*fellow***students*", '*')}
+                returns the array \texttt{["hello", "fellow",
+                    "students"]}.\\
+                \hline
+                \textbf{Param. \#1} & The string to split.\\
+                \hline
+                \textbf{Param. \#2} & The delimiter character.\\
+                \hline
+                \textbf{Return value} & The array of ``fresh'' strings
+                result of the split.\\
+                \hline
+                \textbf{Libc functions} & \texttt{malloc(3)},
+                \texttt{free(3)}\\
+                \hline
+            \end{tabular}
+
+            % ft_itoa
+            \item \begin{tabular}{|l|p{11cm}|}
+                \hline
+                \multicolumn{2}{|c|}{\textbf{ft\_itoa}}\\
+                \hline
+                \textbf{Prototype} &
+                \texttt{char *\hspace{5mm}ft\_itoa(int n);}\\
+                \hline
+                \textbf{Description} & Allocate (with
+                \texttt{malloc(3)}) and returns a ``fresh'' string ending
+                with \texttt{'\textbackslash{}0'} representing the
+                integer \texttt{n} given as argument. Negative numbers
+                must be supported. If the allocation fails, the function
+                returns \texttt{NULL}.\\
+                \hline
+                \textbf{Param. \#1} & The integer to be transformed
+                into a string.\\
+                \hline
+                \textbf{Return value} & The string representing the integer
+                passed as argument.\\
+                \hline
+                \textbf{Libc functions} & \texttt{malloc(3)}\\
+                \hline
+            \end{tabular}
+
+            % ft_putchar
+            \item \begin{tabular}{|l|p{11cm}|}
+                \hline
+                \multicolumn{2}{|c|}{\textbf{ft\_putchar}}\\
+                \hline
+                \textbf{Prototype} &
+                \texttt{void\hspace{5mm}ft\_putchar(char c);}\\
+                \hline
+                \textbf{Description} & Outputs the character \texttt{c}
+                to the standard output.\\
+                \hline
+                \textbf{Param. \#1} & The character to output.\\
+                \hline
+                \textbf{Return value} & None.\\
+                \hline
+                \textbf{Libc functions} & \texttt{write(2)}.\\
+                \hline
+            \end{tabular}
+
+            % ft_putstr
+            \item \begin{tabular}{|l|p{11cm}|}
+                \hline
+                \multicolumn{2}{|c|}{\textbf{ft\_putstr}}\\
+                \hline
+                \textbf{Prototype} &
+                \texttt{void\hspace{5mm}ft\_putstr(char const
+                  *s);}\\
+                \hline
+                \textbf{Description} & Outputs the string \texttt{s}
+                to the standard output.\\
+                \hline
+                \textbf{Param. \#1} & The string to output.\\
+                \hline
+                \textbf{Return value} & None.\\
+                \hline
+                \textbf{Libc functions} & \texttt{write(2)}.\\
+                \hline
+            \end{tabular}
+
+            % ft_putendl
+            \item \begin{tabular}{|l|p{11cm}|}
+                \hline
+                \multicolumn{2}{|c|}{\textbf{ft\_putendl}}\\
+                \hline
+                \textbf{Prototype} &
+                \texttt{void\hspace{5mm}ft\_putendl(char const
+                  *s);}\\
+                \hline
+                \textbf{Description} & Outputs the string \texttt{s}
+                to the standard output followed by a
+                \texttt{'\textbackslash{}n'}.\\
+                \hline
+                \textbf{Param. \#1} & The string to output.\\
+                \hline
+                \textbf{Return value} & None.\\
+                \hline
+                \textbf{Libc functions} & \texttt{write(2)}.\\
+                \hline
+            \end{tabular}
+
+            % ft_putnbr
+            \item \begin{tabular}{|l|p{11cm}|}
+                \hline
+                \multicolumn{2}{|c|}{\textbf{ft\_putnbr}}\\
+                \hline
+                \textbf{Prototype} &
+                \texttt{void\hspace{5mm}ft\_putnbr(int n);}\\
+                \hline
+                \textbf{Description} & Outputs the integer \texttt{n}
+                to the standard output.\\
+                \hline
+                \textbf{Param. \#1} & The integer to output.\\
+                \hline
+                \textbf{Return value} & None.\\
+                \hline
+                \textbf{Libc functions} & \texttt{write(2)}.\\
+                \hline
+            \end{tabular}
+
+            % ft_putchar_fd
+            \item \begin{tabular}{|l|p{11cm}|}
+                \hline
+                \multicolumn{2}{|c|}{\textbf{ft\_putchar\_fd}}\\
+                \hline
+                \textbf{Prototype} &
+                \texttt{void\hspace{5mm}ft\_putchar\_fd(char c, int fd);}\\
+                \hline
+                \textbf{Description} & Outputs the char
+                \texttt{c} to the file descriptor \texttt{fd}.\\
+                \hline
+                \textbf{Param. \#1} & The character to output.\\
+                \hline
+                \textbf{Param. \#2} & The file descriptor.\\
+                \hline
+                \textbf{Return value} & None.\\
+                \hline
+                \textbf{Libc functions} & \texttt{write(2)}.\\
+                \hline
+            \end{tabular}
+
+            % ft_putstr_fd
+            \item \begin{tabular}{|l|p{11cm}|}
+                \hline
+                \multicolumn{2}{|c|}{\textbf{ft\_putstr\_fd}}\\
+                \hline
+                \textbf{Prototype} &
+                \texttt{void\hspace{5mm}ft\_putstr\_fd(char const
+                  *s, int fd);}\\
+                \hline
+                \textbf{Description} & Outputs the string \texttt{s}
+                to the file descriptor \texttt{fd}.\\
+                \hline
+                \textbf{Param. \#1} & The string to output.\\
+                \hline
+                \textbf{Param. \#2} & The file descriptor.\\
+                \hline
+                \textbf{Return value} & None.\\
+                \hline
+                \textbf{Libc functions} & \texttt{write(2)}.\\
+                \hline
+            \end{tabular}
+
+            % ft_putendl_fd
+            \item \begin{tabular}{|l|p{11cm}|}
+                \hline
+                \multicolumn{2}{|c|}{\textbf{ft\_putendl\_fd}}\\
+                \hline
+                \textbf{Prototype} &
+                \texttt{void\hspace{5mm}ft\_putendl\_fd(char const
+                  *s, int fd);}\\
+                \hline
+                \textbf{Description} & Outputs the string \texttt{s}
+                to the file descriptor \texttt{fd} followed by a
+                \texttt{'\textbackslash{}n'}.\\
+                \hline
+                \textbf{Param. \#1} & The string to output.\\
+                \hline
+                \textbf{Param. \#2} & The file descriptor.\\
+                \hline
+                \textbf{Return value} & None.\\
+                \hline
+                \textbf{Libc functions} & \texttt{write(2)}.\\
+                \hline
+            \end{tabular}
+
+            % ft_putnbr_fd
+            \item \begin{tabular}{|l|p{11cm}|}
+                \hline
+                \multicolumn{2}{|c|}{\textbf{ft\_putnbr\_fd}}\\
+                \hline
+                \textbf{Prototype} &
+                \texttt{void\hspace{5mm}ft\_putnbr\_fd(int n, int
+                  fd);}\\
+                \hline
+                \textbf{Description} & Outputs the integer \texttt{n}
+                to the file descriptor \texttt{fd}.\\
+                \hline
+                \textbf{Param. \#1} & The integer to print.\\
+                \hline
+                \textbf{Param. \#2} & The file descriptor.\\
+                \hline
+                \textbf{Return value} & None.\\
+                \hline
+                \textbf{Libc functions} & \texttt{write(2)}.\\
+                \hline
+            \end{tabular}
+
+        \end{itemize}
+
+
+
+%******************************************************************************%
+%                                                                              %
+%                                  Bonus part                                  %
+%                                                                              %
+%******************************************************************************%
+\chapter{Bonus part}
+
+    If you successfully completed the mandatory part, you'll enjoy
+    taking it further. You can see this last section as Bonus
+    Points.\\
+
+    Having functions to manipulate memory and strings is very
+    useful, but you'll soon discover that having functions to
+    manipulate lists is even more useful.\\
+
+    You'll use the following structure to represent the links of your
+    list. This structure must be added to your \texttt{libft.h}
+    file.\\
+
+    \begin{42ccode}
+typedef struct      s_list
+{
+    void            *content;
+    size_t          content_size;
+    struct s_list   *next;
+}                   t_list;
+    \end{42ccode}
+
+    Here is a description of the fields of the \texttt{t\_list}
+    struct:\\
+
+    \begin{itemize}
+
+        \item \texttt{content} : The data contained in the link. The
+          \texttt{void *} allows to store any kind of data.
+
+        \item \texttt{content\_size} : The size of the data stored.
+          The \texttt{void *} type doesn't allow you to know the size
+          of the pointed data, as a consequence, it is necessary to
+          save its size. For instance, the size of the string
+          \texttt{"42"} is \texttt{3 bytes} and the 32bits integer
+          \texttt{42} has a size of \texttt{4 bytes}.
+
+        \item \texttt{next} : The next link's address or \texttt{NULL}
+          if it's the last link.
+
+    \end{itemize}
+
+    \newpage
+    The following functions will allow you to manipulate your lists
+    more easilly.\\
+
+    \begin{itemize}\itemsep1cm
+
+            % ft_lstnew
+            \item \begin{tabular}{|l|p{11cm}|}
+                \hline
+                \multicolumn{2}{|c|}{\textbf{ft\_lstnew}}\\
+                \hline
+                \textbf{Prototype} &
+                \texttt{t\_list *\hspace{5mm}ft\_lstnew(void const
+                  *content, size\_t content\_size);}\\
+                \hline
+                \textbf{Description} & Allocates (with
+                \texttt{malloc(3)}) and returns a ``fresh'' link.
+                The variables \texttt{content} and
+                \texttt{content\_size} of the new link are
+                initialized by \textbf{copy} of the parameters of
+                the function. If the parameter \texttt{content} is
+                nul, the variable \texttt{content} is initialized to
+                \texttt{NULL} and the variable \texttt{content\_size}
+                is initialized to \texttt{0} even if the parameter
+                \texttt{content\_size} isn't. The variable
+                \texttt{next} is initialized to \texttt{NULL}. If
+                the allocation fails, the function returns
+                \texttt{NULL}.\\
+                \hline
+                \textbf{Param. \#1} & The content to put in the new
+                link.\\
+                \hline
+                \textbf{Param. \#2} & The size of the content of the
+                new link.\\
+                \hline
+                \textbf{Return value} & The new link.\\
+                \hline
+                \textbf{Libc functions} & \texttt{malloc(3)},
+                \texttt{free(3)}\\
+                \hline
+            \end{tabular}
+
+            % ft_lstdelone
+            \item \begin{tabular}{|l|p{11cm}|}
+                \hline
+                \multicolumn{2}{|c|}{\textbf{ft\_lstdelone}}\\
+                \hline
+                \textbf{Prototype} &
+                \texttt{void\hspace{5mm}ft\_lstdelone(t\_list **alst,
+                  void (*del)(void *, size\_t));}\\
+                \hline
+                \textbf{Description} & Takes as a parameter a link's
+                pointer address and frees the memory of the link's
+                content using the function \texttt{del} given as
+                a parameter, then frees the link's memory using \texttt{free(3)}.
+                The memory of \texttt{next} must not be freed under any circumstance. Finally,
+                the pointer to the link that was just freed must be
+                set to \texttt{NULL} (quite similar to the function
+                \texttt{ft\_memdel} in the mandatory part).\\
+                \hline
+                \textbf{Param. \#1} & The adress of a pointer to a link
+                that needs to be freed.\\
+                \hline
+                \textbf{Return value} & None.\\
+                \hline
+                \textbf{Libc functions} & \texttt{free(3)}\\
+                \hline
+            \end{tabular}
+
+            % ft_lstdel
+            \item \begin{tabular}{|l|p{11cm}|}
+                \hline
+                \multicolumn{2}{|c|}{\textbf{ft\_lstdel}}\\
+                \hline
+                \textbf{Prototype} &
+                \texttt{void\hspace{5mm}ft\_lstdel(t\_list **alst,
+                  void (*del)(void *, size\_t));}\\
+                \hline
+                \textbf{Description} & Takes as a parameter the adress of a pointer to a link
+                and frees the memory of this link and
+                every successors of that link using the functions \texttt{del}
+                and \texttt{free(3)}. Finally the pointer to the
+                link that was just freed must be set to \texttt{NULL}
+                (quite similar to the function \texttt{ft\_memdel}
+                from the mandatory part).\\
+                \hline
+                \textbf{Param. \#1} & The address of a pointer to the
+                first link of a list that needs to be freed.\\
+                \hline
+                \textbf{Return value} & None.\\
+                \hline
+                \textbf{Libc functions} & \texttt{free(3)}\\
+                \hline
+            \end{tabular}
+
+            % ft_lstadd
+            \item \begin{tabular}{|l|p{11cm}|}
+                \hline
+                \multicolumn{2}{|c|}{\textbf{ft\_lstadd}}\\
+                \hline
+                \textbf{Prototype} &
+                \texttt{void\hspace{5mm}ft\_lstadd(t\_list **alst,
+                  t\_list *new);}\\
+                \hline
+                \textbf{Description} & Adds the element \texttt{new}
+                at the beginning of the list.\\
+                \hline
+                \textbf{Param. \#1} & The address of a pointer to the
+                first link of a list.\\
+                \hline
+                \textbf{Param. \#2} & The link to add at the beginning
+                of the list.\\
+                \hline
+                \textbf{Return value} & None.\\
+                \hline
+                \textbf{Libc functions} & None.\\
+                \hline
+            \end{tabular}
+
+            % ft_lstiter
+            \item \begin{tabular}{|l|p{11cm}|}
+                \hline
+                \multicolumn{2}{|c|}{\textbf{ft\_lstiter}}\\
+                \hline
+                \textbf{Prototype} &
+                \texttt{void\hspace{5mm}ft\_lstiter(t\_list *lst,
+                  void (*f)(t\_list *elem));}\\
+                \hline
+                \textbf{Description} & Iterates the list \texttt{lst}
+                and applies the function \texttt{f} to each link.\\
+                \hline
+                \textbf{Param. \#1} & A pointer to the
+                first link of a list.\\
+                \hline
+                \textbf{Param. \#2} & The address of a function to
+                apply to each link of a list.\\
+                \hline
+                \textbf{Return value} & None.\\
+                \hline
+                \textbf{Libc functions} & None.\\
+                \hline
+            \end{tabular}
+
+            % ft_lstmap
+            \item \begin{tabular}{|l|p{11cm}|}
+                \hline
+                \multicolumn{2}{|c|}{\textbf{ft\_lstmap}}\\
+                \hline
+                \textbf{Prototype} &
+                \texttt{t\_list *\hspace{5mm}ft\_lstmap(t\_list *lst,
+                  t\_list * (*f)(t\_list *elem));}\\
+                \hline
+                \textbf{Description} & Iterates a list \texttt{lst}
+                and applies the function \texttt{f} to each link to
+                create a ``fresh'' list (using \texttt{malloc(3)})
+                resulting from the successive applications of \texttt{f}.
+                If the allocation fails, the function returns
+                \texttt{NULL}.\\
+                \hline
+                \textbf{Param. \#1} & A pointer's to the
+                first link of a list.\\
+                \hline
+                \textbf{Param. \#2} & The address of a function to
+                apply to each link of a list.\\
+                \hline
+                \textbf{Return value} & The new list.\\
+                \hline
+                \textbf{Libc functions} & \texttt{malloc(3)},
+                \texttt{free(3)}.\\
+                \hline
+            \end{tabular}
+
+    \end{itemize}
+
+    \vspace{1cm}
+
+    If you successfully completed both the mandatory and bonus
+    sections of this project, we encourage you to add other functions
+    that you believe could be useful to expand your library. For
+    instance, a version of \texttt{ft\_strsplit} that returns a list
+    instead of an array, the function \texttt{ft\_lstfold} similar to
+    the function \texttt{reduce} in \texttt{Python} and the function
+    \texttt{List.fold\_left} in \texttt{OCaml} (beware of the memory
+    leak !). You can add functions to manipulate arrays, stacks,
+    files, maps, hashtables, etc. The limit is your imagination.
+
+
+
+%******************************************************************************%
+%                                                                              %
+%                        Submission and peer correction                        %
+%                                                                              %
+%******************************************************************************%
+\chapter{Submission and peer correction}
+
+    Submit your work on your \texttt{GiT} repository as usual.
+    Only the work on your repository will be graded.\\
+
+    Once your have completed your defences, Deepthought (the
+    ``moulinette'') will grade your work. Your final grade will be
+    calculated taking into account your peer-correction grades and
+    Deepthought’s grade.\\
+
+    Deepthought will grade your assignments in the order of the
+    subject : Part 1, Part 2 and Bonus. One error in one of the
+    sections will automatically stop the grading.\\
+
+    Good luck to you and don’t forget your author file !
+
+
+
+\end{document}
+%******************************************************************************%
