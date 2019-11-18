@@ -1,5 +1,5 @@
 # List the pdf's to build. foo.tex will produce foo.pdf
-TARGETS = foo.pdf
+TARGETS = awk.pdf
 
 # List the files included in the slides
 DEPS = 

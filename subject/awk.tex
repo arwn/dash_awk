@@ -1,0 +1,96 @@
+%******************************************************************************%
+%                                                                              %
+%                  libft.en.tex for libft                                      %
+%                  Created on : Tue Apr 12 13:54:27 2016                       %
+%                  Made by : Geoffrey "Geff" LEGER <vikingz@staff.42.fr>       %
+%                                                                              %
+%******************************************************************************%
+
+\documentclass{42-en}
+
+
+%******************************************************************************%
+%                                                                              %
+%                                   Prologue                                   %
+%                                                                              %
+%******************************************************************************%
+\begin{document}
+
+\title{AWK}
+\subtitle{Aho, Weinberger, Kernighan}
+\member{Arwn}{arwn@42.us.org}
+
+\summary {awk \texttt{AWK} awk awk awk.}
+    \maketitle
+
+    \tableofcontents
+
+\newpage
+%******************************************************************************%
+%                                                                              %
+%                                  Foreword                                    %
+%                                                                              %
+%******************************************************************************%
+\chapter{Foreword}
+
+    There is no foreword.\\
+    Read the manpage.\\
+
+    \begin{itemize}\itemsep7pt
+
+        \item \href{https://man.openbsd.org/awk}{the manpage}\\
+
+    \end{itemize}
+
+\newpage
+
+%******************************************************************************%
+%                                                                              %
+%                             General Instructions                             %
+%                                                                              %
+%******************************************************************************%
+\chapter{Instructions}
+
+    \begin{itemize}
+
+      \item You will turn in a file named solution.awk.
+      \item Norminette runs the following command to grade you
+        \begin{42console}
+% awk -F, -f solution.awk avocado.csv > user && diff user system
+%
+        \end{42console}
+
+      \item Your project must *not* be written in accordance with the Norm.
+
+    \end{itemize}
+
+    Given the file `avocado.csv', write an awk script that will output
+    every entry where avocados cost less than a dollar on average followed
+    by the average of that set.\\
+
+    example:
+    \begin{42console}
+% cat avocado.csv
+Price, Region
+0, 1.33, Albany
+1, 1.35, Albany
+2, 0.93, Albany
+% awk -F, -f solution.awk avocado.csv
+2, 0.93, Albany
+0.93
+%
+    \end{42console}
+
+%******************************************************************************%
+%                                                                              %
+%                        Submission and peer correction                        %
+%                                                                              %
+%******************************************************************************%
+\chapter{Submission}
+
+    Submit \texttt{solution.awk} in the root of your directory.
+    Only the work on your repository will be graded.
+    ``moulinette'' will grade your work.\\
+
+\end{document}
+%******************************************************************************%
