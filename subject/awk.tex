@@ -56,7 +56,7 @@
       \item You will turn in a file named solution.awk.
       \item Norminette runs the following command to grade you
         \begin{42console}
-% awk -F, -f solution.awk avocado.csv > user && diff user system
+% awk -F "," -f solution.awk avocado.csv > user && diff user system
 %
         \end{42console}
 
@@ -75,7 +75,7 @@ Price, Region
 0, 1.33, Albany
 1, 1.35, Albany
 2, 0.93, Albany
-% awk -F, -f solution.awk avocado.csv
+% awk -F "," -f solution.awk avocado.csv
 2, 0.93, Albany
 0.93
 %
