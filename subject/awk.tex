@@ -71,12 +71,12 @@
     example:
     \begin{42console}
 % cat avocado.csv
-Price, Region
-0,1.33,Albany
-1,1.35,Albany
-2,0.93,Albany
+Price, ..., Region
+0,1.33,...,Albany
+1,1.35,...,Albany
+2,0.93,...,Albany
 % awk -F "," -f solution.awk avocado.csv
-2,0.93,Albany
+2,0.93,...,Albany
 0.93
 %
     \end{42console}
