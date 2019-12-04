@@ -1,0 +1,7 @@
+job_name: awkdash
+
+correction:
+  units:
+    general_tests:
+      type: mandatory
+      potential_grade: 100

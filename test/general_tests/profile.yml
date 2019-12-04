@@ -1,0 +1,7 @@
+name: awkdash
+
+user_directory: .
+
+check_norme: False
+
+unit: custom
